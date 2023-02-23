@@ -6,14 +6,15 @@ const _defaultBox = 'default';
 
 class SimpleStorage implements StorageBase {
   final String path;
+  final String boxName;
 
-  SimpleStorage(this.path);
+  SimpleStorage(this.path, {this.boxName = _defaultBox});
 
   late Box box;
 
   @override
   Future<void> init() async {
-    box = await Hive.openBox(_defaultBox, path: path);
+    box = await Hive.openBox(boxName, path: path);
   }
 
   @override
